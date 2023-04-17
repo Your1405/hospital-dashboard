@@ -1,0 +1,72 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1 class="overview-title"><a href="/dashboard/overviews/ratings/{{id}}"><- </a>Edit rating for facility '{{facility_data.1}}': </h1> 
+    </div>
+    <form class="new-form" action="/dashboard/overviews/ratings/edit/{{id}}" method="POST">
+        {% csrf_token %}
+        <div class="input-container">
+            <label for="overall">Overall</label>
+            <input value="{{rating_data.2}}" class="text-input" min="1" max="5" type="number" name="overall" id="overall" placeholder="Overall rating from 1 to 5..." required>
+        <div class="input-container">
+            <label for="mortality">Mortality</label>
+            <select class="dropdown-input" name="mortality" id="mortality" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.3 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="safety">Safety</label>
+            <select class="dropdown-input" name="safety" id="safety" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.4 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="readmission">Readmission</label>
+            <select class="dropdown-input" name="readmission" id="readmission" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.5 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="experience">Experience</label>
+            <select class="dropdown-input" name="experience" id="experience" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.6 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="effectiveness">Effectiveness</label>
+            <select class="dropdown-input" name="effectiveness" id="effectiveness" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.7 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="timeliness">Timeliness</label>
+            <select class="dropdown-input" name="timeliness" id="timeliness" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.8 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="imaging">Imaging</label>
+            <select class="dropdown-input" name="imaging" id="imaging" required>
+                {% for choice in rating_choices %}
+                    <option {%if choice == rating_data.9 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="button submit-button" type="submit">Update rating</button>
+    </form>
+</div>
+{% endblock content %}

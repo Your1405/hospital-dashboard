@@ -1,0 +1,47 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+<div class="overview-container">
+    <div class="overview-header">
+        <h1 class="overview-title"><a href="/dashboard/overviews/facilities"><- </a>Overview of facility '{{facility_data.1}}'</h1>
+        <div class="flex-col gap-m">
+            {% if rating_data|length > 0 %}
+            <a href="/dashboard/overviews/ratings/{{id}}">Go to facility ratings</a>    
+            {% else %}
+            <a href="/dashboard/overviews/ratings/add/{{id}}">Add facility ratings</a>    
+            {% endif %}
+            {% if facility_procedures|length > 0 %}
+            <a href="/dashboard/overviews/facilityprocedures/facility/{{id}}">Go to facility procedures</a>    
+            {% else %}
+            <a href="/dashboard/overviews/facilityprocedures/facility/add/{{id}}">Add facility procedures</a>    
+            {% endif %}
+        </div>
+    </div>
+    <div class="view-container">
+        <div>
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <td>{{facility_data.1}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>City</th>
+                    <td>{{facility_data.2}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>State</th>
+                    <td>{{facility_data.5}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>Type</th>
+                    <td>{{facility_data.6}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="action-container">
+            <a class="button edit-button" href="/dashboard/overviews/facilities/edit/{{id}}">Edit</a>
+            <a class="button delete-button" href="/dashboard/overviews/facilities/delete/{{id}}">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1 class="overview-title"><a href="/dashboard/overviews/facilityprocedures/none"><- </a>Add procedures for facility '{{facility_data.1}}' </h1> 
+        </div>
+        <form class="new-form" action="/dashboard/overviews/facilityprocedures/facility/add/{{id}}" method="POST">
+            {% csrf_token %}
+            {% for procedure in procedures %}
+            <div>
+                <h2>{{procedure.1}}</h2>
+                <div class="input-container">
+                    <label for="{{procedure.1|lower|cut:" "}}-cost">Cost</label>
+                    <input class="text-input" name="{{procedure.1|lower|cut:" "}}-cost" id="{{procedure.1|lower|cut:" "}}-cost" type="number" step="0.01" min="0" placeholder="Enter the {{procedure.1|lower}} cost..." required>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="{{procedure.1|lower|cut:" "}}-quality">Quality</label>
+                    <select class="dropdown-input" name="{{procedure.1|lower|cut:" "}}-quality" id="{{procedure.1|lower|cut:" "}}-quality" required>
+                        {% for choice in choices %}
+                            <option {%if choice == "Average" %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="{{procedure.1|lower|cut:" "}}-value">Value</label>
+                    <select class="dropdown-input" name="{{procedure.1|lower|cut:" "}}-value" id="{{procedure.1|lower|cut:" "}}-value" required>
+                        {% for choice in choices %}
+                            <option {%if choice == "Average" %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+            <br>
+            <button class="button submit-button" type="submit">Add Procedures</button>
+        </form>
+    </div>
+{% endblock content %}

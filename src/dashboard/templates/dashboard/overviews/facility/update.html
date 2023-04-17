@@ -1,0 +1,37 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1 class="overview-title"><a href="/dashboard/overviews/facilities/{{id}}"><- </a>Edit facility {{facility_data.1}}: </h1> 
+    </div>
+    <form class="form" action="/dashboard/overviews/facilities/edit/{{id}}" method="POST">
+        {% csrf_token %}
+        <span class="input-container">
+            <label for="name">Name</label>
+            <input value="{{facility_data.1}}" class="text-input" type="text" name="name" id="name" placeholder="Facility name..." required>
+        </span>
+        <span class="input-container">
+            <label for="name">City</label>
+            <input value="{{facility_data.2}}" class="text-input" type="text" name="city" id="city" placeholder="City name..." required>
+        </span>
+        <span class="input-container">
+            <label for="state">State</label>
+            <select class="dropdown-input" name="state" id="state" required>
+                {% for state in states %}
+                <option {% if state.0 == facility_data.3 %}selected="true"{% endif %} value="{{state.0}}">{{state.2}}</option>
+                {% endfor %}
+            </select>
+        </span>
+        <span class="input-container">
+            <label for="type">Type</label>
+            <select class="dropdown-input" name="type" id="type" required>
+                {% for type in types %}
+                <option {% if type.0 == facility_data.4 %}selected="true"{% endif %} value="{{ type.0 }}">{{type.1}}</option>
+                {% endfor %}
+            </select>
+        </span>
+        <button class="button submit-button" type="submit">Edit facility</button>
+    </form>
+</div>
+{% endblock content %}

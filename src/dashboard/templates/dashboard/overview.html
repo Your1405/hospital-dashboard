@@ -1,0 +1,14 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+{% load static %}
+    <div>
+        <h1>Overviews: </h1>
+        <div class="navigation-container"> 
+            <a class="dashboard-link" href="/dashboard/overviews/facilities"><img src="{% static 'dashboard/images/facility.svg' %}" alt="facility icon" height="16"/> Facilities</a>
+            <a class="dashboard-link" href="/dashboard/overviews/facilityprocedures/all"><img src="{% static 'dashboard/images/bed-pulse.svg' %}" alt="facility procedures icon" height="16"/> Facility Procedures</a>
+            <a class="dashboard-link" href="/dashboard/overviews/ratings/all"><img src="{% static 'dashboard/images/rating.svg' %}" alt="ratings icon" height="16"/> Ratings</a>
+            <a class="dashboard-link" href="/dashboard/overviews/procedures"><img src="{% static 'dashboard/images/medical.svg' %}" alt="procedures icon" height="16"/> Procedures</a>
+        </div>
+    </div>
+{% endblock content %}

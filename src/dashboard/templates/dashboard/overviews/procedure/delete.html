@@ -1,0 +1,15 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div class="overview-container">
+        <div class="overview-header">
+            <h1 class="overview-title"><a href="/dashboard/overviews/procedures/{{id}}"><- </a>Do you want to delete procedure: '{{procedure_data.1}}'?</h1>
+        </div>
+        <form class="delete-form" action="/dashboard/overviews/procedures/delete/{{id}}" method="POST">
+            {% csrf_token %}
+            <button class="button no-button" name="choice" type="submit" value="no">No</button>
+            <button class="button yes-button" name="choice" type="submit" value="yes">Yes</button>
+        </form>
+        <p class="disclaimer">(This cannot be undone!)</p>
+    </div>
+{% endblock content %}

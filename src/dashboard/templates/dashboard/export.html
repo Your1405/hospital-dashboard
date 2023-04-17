@@ -1,0 +1,13 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+{% load static %}
+<div>
+    <h1>Export overviews: </h1>
+    <div class="navigation-container"> 
+        <a class="dashboard-link" href="/dashboard/export?doc=1">Facilities with safety rating of "Same"</a>
+        <a class="dashboard-link" href="/dashboard/export?doc=2">Facilities with "Average" heart attack quality</a>
+        <a class="dashboard-link" href="/dashboard/export?doc=3">Facilities with a "Hip Knee" cost of 0</a>
+    </div>
+</div>
+{% endblock content %}

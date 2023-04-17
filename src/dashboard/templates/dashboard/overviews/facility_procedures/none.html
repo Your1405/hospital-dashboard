@@ -1,0 +1,93 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    {% load mathfilters %}
+    {% load static %}
+    <div class="overview-container">
+        <div class="overview-header">
+            <h1 class="overview-title"><a href="/dashboard/overviews"><- </a> All facilities with no procedures</h1>
+            <a href="/dashboard/overviews/facilityprocedures/all">All facilities with procedures</a>
+        </div>
+        <form action="/dashboard/overviews/ratings/none" method="POST">
+            {% csrf_token %}
+            <label for="search">Search: </label>
+            <input class="search-bar" placeholder="Search by facility, city or state..." type="search" name="search" value="{{search_query}}">
+            <button class="search-button" type="submit">Search</button>
+        </form>
+        <div class="content-container">
+            {% if facilities|length > 0 %}
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+                {% for facility in facilities %}
+                <tr>
+                    <td>{{facility.1}}</td>
+                    <td>{{facility.2}}</td>
+                    <td>{{facility.3}}</td>
+                    <td>{{facility.4}}</td>
+                    <td class="actions-row">
+                        <a href="/dashboard/overviews/facilityprocedures/facility/add/{{facility.0}}" class="view-action">Add procedures</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="gap-m flex-col">
+                <div>
+                    <img src="{% static 'dashboard/images/not-found.svg' %}" alt="no data found" width="128" height="128" class="not-found-image">
+                    {% if search_query == "" %}
+                        <p>There are no facilities.</p>
+                        <a href="/dashboard/overviews/facilityprocedures/all" class="button new-button">Go to facilities with procedures</a>
+                    {% else %}
+                        <p>Search "{{search_query}}" has no results :(</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% if facilities|length > 0 %}
+        <div class="pagination-container">
+            {% if current_page != 1 %}
+                <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{current_page|sub:1}}">Prev</a>
+                <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page=1">1</a>
+                <span>..</span>
+            {% endif %}
+            {% for page in pages %}
+                {% if page == current_page|sub:2 %}
+                    {% if page != 1 %}
+                        <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{page}}">{{page}}</a>
+                    {% endif %}
+                {% endif %}
+                {% if page == current_page|sub:1 %}
+                    {% if page != 1 %}
+                        <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{page}}">{{page}}</a>
+                    {% endif %}
+                {% endif %}
+                {% if page == current_page %}
+                    <p>{{page}}</p>
+                {% endif %}
+                {% if page == current_page|add:1 %}
+                    {% if page != total_pages %}
+                        <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{page}}">{{page}}</a>
+                    {% endif %}
+                {% endif %}
+                {% if page == current_page|add:2 %}
+                    {% if page != total_pages %}
+                        <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{page}}">{{page}}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if has_next_page %}
+                <span>..</span>
+                <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{total_pages}}">{{total_pages}}</a>
+                <a href="/dashboard/overviews/facilityprocedures/none?search={{search_query}}&page={{current_page|add:1}}">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{% endblock content %}

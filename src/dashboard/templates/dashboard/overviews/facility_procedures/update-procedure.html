@@ -1,0 +1,41 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1 class="overview-title"><a href="/dashboard/overviews/facilityprocedures/facility/{{id}}"><- </a>Update procedure '{{facility_data.0.6}}' for facility '{{facility_data.0.1}}' </h1> 
+        </div>
+        <form class="new-form" action="/dashboard/overviews/facilityprocedures/facility/edit/{{id}}?procedure={{procedure_id}}" method="POST">
+            {% csrf_token %}
+            {% for facility in facility_data %}
+            <div>
+                <h2>{{facility.6}}</h2>
+                <div class="input-container">
+                    <label for="cost">Cost</label>
+                    <input value="{{facility.7}}" class="text-input" name="cost" id="cost" type="number" step="0.01" min="0" placeholder="Enter the {{procedure.1|lower}} cost..." required>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="quality">Quality</label>
+                    <select class="dropdown-input" name="quality" id="quality" required>
+                        {% for choice in choices %}
+                            <option {%if choice == facility.8 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="value">Value</label>
+                    <select class="dropdown-input" name="value" id="value" required>
+                        {% for choice in choices %}
+                            <option {%if choice == facility.9 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+            <br>
+            <button class="button submit-button" type="submit">Update Procedure</button>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,95 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="overview-container">
+    <div class="overview-header">
+        <h1 class="overview-title"><a href="/dashboard/overviews/ratings/all"><- </a>Overview ratings of facility '{{rating_data.0}}'</h1>
+        <a href="/dashboard/overviews/facilities/{{id}}">Go to facility details</a>
+    </div>
+    <div class="view-container">
+        <div class="rating-table-container">
+            <h2>Facility info: </h2>
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <td>{{facility_data.1}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>City</th>
+                    <td>{{facility_data.2}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>State</th>
+                    <td>{{facility_data.5}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>Type</th>
+                    <td>{{facility_data.6}}</td>
+                </tr>
+            </table>
+            <div class="action-container">
+                <a class="button edit-button" href="/dashboard/overviews/ratings/edit/{{id}}">Edit ratings</a>
+                <a class="button delete-button" href="/dashboard/overviews/ratings/delete/{{id}}">Delete ratings</a>
+            </div>
+        </div>
+        <div>
+            <h2>Ratings: </h2>
+            <div class="rating-container">
+                <div>
+                    <p>Overall: </p>
+                    <div>
+                        {% if rating_data.2 > 0 %}
+                        {% for score in overall_rating %}
+                            {% if score <= rating_data.2 %}
+                                <img src="{% static '/dashboard/images/star-fill.svg' %}" alt='star-rating' height="16" />
+                            {% endif %}
+                            {% if score > rating_data.2 %}
+                                <img src="{% static '/dashboard/images/star.svg' %}" alt='star-rating' height="16" />
+                            {% endif %}
+                        {% endfor %} 
+                        {% else %}
+                            <p>No overall rating</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <table class="overview-table">
+                        <tr class="table-header">
+                            <th>Mortality</th>
+                            <td>{{rating_data.3}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Safety</th>
+                            <td>{{rating_data.4}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Readmission</th>
+                            <td>{{rating_data.5}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Experience</th>
+                            <td>{{rating_data.6}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Effectiveness</th>
+                            <td>{{rating_data.7}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Timeliness</th>
+                            <td>{{rating_data.8}}</td>
+                        </tr>
+                        <tr class="table-header">
+                            <th>Imaging</th>
+                            <td>{{rating_data.9}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <table>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

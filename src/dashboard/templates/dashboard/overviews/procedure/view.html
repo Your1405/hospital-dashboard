@@ -1,0 +1,23 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+<div class="overview-container">
+    <div class="overview-header">
+        <h1 class="overview-title"><a href="/dashboard/overviews/procedures"><- </a>Overview of procedure '{{procedure_data.1}}'</h1>
+    </div>
+    <div class="view-container">
+        <div>
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <td>{{procedure_data.1}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="action-container">
+            <a class="button edit-button" href="/dashboard/overviews/procedures/edit/{{id}}">Edit</a>
+            <a class="button delete-button" href="/dashboard/overviews/procedures/delete/{{id}}">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

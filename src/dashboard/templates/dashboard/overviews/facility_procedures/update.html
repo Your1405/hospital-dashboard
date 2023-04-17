@@ -1,0 +1,41 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1 class="overview-title"><a href="/dashboard/overviews/facilityprocedures/facility/{{id}}"><- </a>Add procedures for facility '{{facility_data.0.1}}' </h1> 
+        </div>
+        <form class="new-form" action="/dashboard/overviews/facilityprocedures/facility/edit/{{id}}" method="POST">
+            {% csrf_token %}
+            {% for facility in facility_data %}
+            <div>
+                <h2>{{facility.6}}</h2>
+                <div class="input-container">
+                    <label for="{{facility.6|lower|cut:" "}}-cost">Cost</label>
+                    <input value="{{facility.7}}" class="text-input" name="{{facility.6|lower|cut:" "}}-cost" id="{{facility.6|lower|cut:" "}}-cost" type="number" step="0.01" min="0" placeholder="Enter the {{procedure.1|lower}} cost..." required>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="{{facility.6|lower|cut:" "}}-quality">Quality</label>
+                    <select class="dropdown-input" name="{{facility.6|lower|cut:" "}}-quality" id="{{facility.6|lower|cut:" "}}-quality" required>
+                        {% for choice in choices %}
+                            <option {%if choice == facility.8 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div class="input-container">
+                    <label for="{{facility.6|lower|cut:" "}}-value">Value</label>
+                    <select class="dropdown-input" name="{{facility.6|lower|cut:" "}}-value" id="{{facility.6|lower|cut:" "}}-value" required>
+                        {% for choice in choices %}
+                            <option {%if choice == facility.9 %}selected="true"{% endif %} value="{{choice}}">{{choice}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+            <br>
+            <button class="button submit-button" type="submit">Update Procedures</button>
+        </form>
+    </div>
+{% endblock content %}

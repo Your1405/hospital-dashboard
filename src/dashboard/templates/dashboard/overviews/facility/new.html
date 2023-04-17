@@ -1,0 +1,38 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1 class="overview-title"><a href="/dashboard/overviews/facilities"><- </a>Add a new facility: </h1> 
+        </div>
+        <form class="new-form" action="/dashboard/overviews/facilities/new" method="POST">
+            {% csrf_token %}
+            <span class="input-container">
+                <label for="name">Name</label>
+                <input class="text-input" type="text" name="name" id="name" placeholder="Facility name..." required>
+
+            <span class="input-container">
+                <label for="name">City</label>
+                <input class="text-input" type="text" name="city" id="city" placeholder="City name..." required>
+            </span>
+            <span class="input-container">
+                <label for="state">State</label>
+                <select class="dropdown-input" name="state" id="state" required>
+                    {% for state in states %}
+                    <option value="{{state.0}}">{{state.2}}</option>
+                    {% endfor %}
+                </select>
+            </span>
+            <span class="input-container">
+                <label for="type">Type</label>
+                <select class="dropdown-input" name="type" id="type" required>
+                    {% for type in types %}
+                    <option value="{{ type.0 }}">{{type.1}}</option>
+                    {% endfor %}
+                </select>
+            </span>
+            <br>
+            <button class="button submit-button" type="submit">Add new facility</button>
+        </form>
+    </div>
+{% endblock content %}  

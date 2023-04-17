@@ -1,0 +1,59 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="overview-container">
+    <div class="overview-header">
+        <h1 class="overview-title"><a href="/dashboard/overviews/facilityprocedures/all"><- </a>Overview ratings of facility '{{facility.0.1}}'</h1>
+        <a href="/dashboard/overviews/facilities/{{facility.0.0}}">Go to facility details</a>
+    </div>
+    <div class="view-container">
+        <div class="rating-table-container gap-m">
+            <h2>Facility info: </h2>
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th>Name</th>
+                    <td>{{facility.0.1}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>City</th>
+                    <td>{{facility.0.2}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>State</th>
+                    <td>{{facility.0.3}}</td>
+                </tr>
+                <tr class="table-header">
+                    <th>Type</th>
+                    <td>{{facility.0.4}}</td>
+                </tr>
+            </table>
+            <h2>Procedure info: </h2>
+            <table class="overview-table">
+                <tr class="table-header">
+                    <th></th>
+                    <th>Cost</th>
+                    <th>Quality</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+                {% for procedure in facility %}
+                    <tr class="table-header">
+                        <th>{{procedure.6}}</th>
+                        <td>{{procedure.7}}</td>
+                        <td>{{procedure.8}}</td>
+                        <td>{{procedure.9}}</td>
+                        <td class="actions-row">
+                            <a href="/dashboard/overviews/facilityprocedures/facility/edit/{{procedure.0}}?procedure={{procedure.5}}"><img src="{% static 'dashboard/images/pencil.svg' %}" width="18"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="action-container">
+                <a class="button edit-button" href="/dashboard/overviews/facilityprocedures/facility/edit/{{facility.0.0}}">Edit procedures</a>
+                <a class="button delete-button" href="/dashboard/overviews/facilityprocedures/facility/delete/{{facility.0.0}}">Delete procedures</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1 class="overview-title"><a href="/dashboard/overviews/procedures"><- </a>Add a new procedure: </h1> 
+        </div>
+        <form class="new-form" action="/dashboard/overviews/procedures/new" method="POST">
+            {% csrf_token %}
+            <span class="input-container">
+                <label for="name">Name</label>
+                <input class="text-input" type="text" name="name" id="name" placeholder="Procedure name..." required>
+            </span>
+            <br>
+            <button class="button submit-button" type="submit">Add new procedure</button>
+        </form>
+    </div>
+{% endblock content %}  
